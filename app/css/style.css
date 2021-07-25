@@ -1,0 +1,17 @@
+.h1,
+.form-control{
+    margin: 5vh;
+    width: 60vw;
+}
+
+.btn,
+.border,
+.table {
+    margin-left: 5vh;
+    margin-bottom: 5vh;
+}
+
+.h4 {
+    margin-top:10vh;
+    margin-left: 5vh;
+}
