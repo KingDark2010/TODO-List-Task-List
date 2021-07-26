@@ -21,7 +21,8 @@ loadEventListener()
 
 // Load all events function
 function loadEventListener(){
-    taskAddBtn.addEventListener('click', addTask)
+    taskAddBtn.addEventListener('click', addTask);
+    taskInput.addEventListener("keyup", enterTask);
 }
 
 // add item on click
@@ -45,14 +46,14 @@ function addTask(event) {
         console.log(taskRaw);
         taskCollection.appendChild((taskRaw));
     }
+    taskInput.value = "";
     event.preventDefault()
 }
 
 // make tasks adable woith enter key 
-
-taskInput.addEventListener("keyup", function(event) {
-    if (event.key === 13) {
+function enterTask(event) {
+    if (event.key == "Enter") {
         taskAddBtn.click();
     }
     event.preventDefault();
-});
+}
