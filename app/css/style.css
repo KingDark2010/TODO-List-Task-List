@@ -6,12 +6,16 @@
 
 .btn,
 .border,
-.table {
+.table,
+.h4 {
     margin-left: 5vh;
     margin-bottom: 5vh;
 }
 
-.h4 {
-    margin-top:10vh;
-    margin-left: 5vh;
+.table{
+    width: 60vw;
+}
+
+.left-btn {
+    text-align: right;
 }
