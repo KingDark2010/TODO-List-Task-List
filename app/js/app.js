@@ -85,7 +85,6 @@ function removeAllTasks() {
 
 function filterTasks(event) {
     const text = event.target.value.toLowerCase();
-    console.log(text);
     const tasks = taskCollection.querySelectorAll('.task-element');
     tasks.forEach(function(task) {
         if(task.innerHTML.toLowerCase().indexOf(text) > -1) {
