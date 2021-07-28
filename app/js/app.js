@@ -24,6 +24,8 @@ function loadEventListener(){
     taskCollection.addEventListener("click", removeTask);
     // delete all tasks
     taskDeleteAll.addEventListener("click", removeAllTasks);
+    // filter tasks
+    taskFilter.addEventListener("keyup", filterTasks);
 }
 
 // add item on click function
@@ -37,6 +39,7 @@ function addTask(event) {
         const task = document.createElement('th');
         const taskDelete = document.createElement('th');
         // adding task to table
+        task.classList = "task-element";
         task.innerHTML = `${taskInput.value}`;
         taskDelete.classList= 'left-btn'
         taskDelete.innerHTML = `<button type="button" class="btn btn-outline-danger delete"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
@@ -44,10 +47,10 @@ function addTask(event) {
         </svg> Delete</button>`
         taskRaw.appendChild(task);
         taskRaw.appendChild(taskDelete);
-        console.log(taskRaw);
         taskCollection.appendChild((taskRaw));
     }
     taskInput.value = "";
+    taskDeleteAll.disabled = false;
     event.preventDefault()
 }
 
@@ -75,11 +78,20 @@ function removeAllTasks() {
     while(taskCollection.firstChild) {
         taskCollection.removeChild(taskCollection.firstChild);
     }
+    taskDeleteAll.disabled = true;
 }
 
-
-// filter task function
+// task filter function 
 
 function filterTasks(event) {
     const text = event.target.value.toLowerCase();
+    console.log(text);
+    const tasks = taskCollection.querySelectorAll('.task-element');
+    tasks.forEach(function(task) {
+        if(task.innerHTML.toLowerCase().indexOf(text) > -1) {
+            task.parentElement.style.display = 'table-row';
+        } else {
+            task.parentElement.style.display = 'none';
+        }
+    });
 }
