@@ -32,7 +32,7 @@ function loadEventListener(){
 
 function addTask(event) {
     if (taskInput.value === "") {
-        alert('Please add a task')
+        showAlert("Please enter a task", "alert-danger");
     } else {
         //create table raw for task
         const taskRaw = document.createElement('tr');
@@ -48,9 +48,9 @@ function addTask(event) {
         taskRaw.appendChild(task);
         taskRaw.appendChild(taskDelete);
         taskCollection.appendChild((taskRaw));
+        taskDeleteAll.disabled = false;
+        taskInput.value = "";
     }
-    taskInput.value = "";
-    taskDeleteAll.disabled = false;
     event.preventDefault()
 }
 
@@ -66,9 +66,8 @@ function enterTask(event) {
 
 function removeTask(event) {
     if(event.target.classList.contains('delete')) {
-        if(confirm("are you sure ?")) {
-            event.target.parentElement.parentElement.remove();
-        }
+        event.target.parentElement.parentElement.remove();
+        showAlert(`Task ${event.target.parentElement.parentElement.firstChild.innerHTML} deleted`, 'alert-success');
     }
 }
 
@@ -78,9 +77,25 @@ function removeAllTasks() {
     while(taskCollection.firstChild) {
         taskCollection.removeChild(taskCollection.firstChild);
     }
+    showAlert("All tasks deleted", "alert-success");
     taskDeleteAll.disabled = true;
 }
 
+// validation alert function
+
+function showAlert(message, className) {
+    //create a new alert element
+    const alert = document.createElement('div');
+    //add the alert class
+    alert.className = `alert ${className}`;
+    //add the message
+    alert.innerHTML = message;
+    //append the alert to the body
+    const container = document.querySelector('.border');
+    container.appendChild(alert);
+    //remove the alert after 3 seconds
+    setTimeout(() => { container.removeChild(alert); }, 3000);
+}
 // task filter function 
 
 function filterTasks(event) {
